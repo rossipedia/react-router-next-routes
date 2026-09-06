@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "description": "Next.js-inspired file-system routes for React Router framework mode",
   "type": "module",
+  "license": "MIT",
+  "private": false,
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
