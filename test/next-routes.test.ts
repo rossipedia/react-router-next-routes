@@ -42,6 +42,15 @@ test("generates pages, route groups, and layouts", () => {
   assert.match(serialized, /blog\/layout\.tsx/);
 });
 
+test("allows a page and layout in the same directory", () => {
+  const dir = fixture(["layout.tsx", "page.tsx"]);
+  const serialized = JSON.stringify(nextRoutes(optionsFor(dir)));
+
+  assert.match(serialized, /layout\.tsx/);
+  assert.match(serialized, /page\.tsx/);
+  assert.match(serialized, /"index":true/);
+});
+
 test("maps dynamic, optional, and catch-all segments", () => {
   const dir = fixture([
     "users/[id]/page.tsx",
@@ -99,5 +108,5 @@ test("rejects duplicate route patterns", () => {
 
 test("rejects multiple route modules in one directory", () => {
   const rootDirectory = relative(resolve("app"), fixture(["page.tsx", "route.ts"]));
-  assert.throws(() => nextRoutes({ rootDirectory }), /Multiple route modules/);
+  assert.throws(() => nextRoutes({ rootDirectory }), /Multiple page route modules/);
 });

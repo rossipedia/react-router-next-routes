@@ -175,8 +175,10 @@ function validate(files: RouteFile[], root: Directory): void {
     byDirectory.set(key, existing);
   }
   for (const [directory, entries] of byDirectory) {
-    if (entries.length > 1) {
-      throw new Error(`Multiple route modules found in ${directory}`);
+    for (const kind of ["page", "layout"] as const) {
+      if (entries.filter((entry) => entry.kind === kind).length > 1) {
+        throw new Error(`Multiple ${kind} route modules found in ${directory}`);
+      }
     }
   }
 }
