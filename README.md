@@ -8,7 +8,7 @@ Next.js-inspired file-system routing for React Router framework mode.
 ## Install
 
 ```sh
-npm install @rossipedia/react-router-next-routes
+pnpm add @rossipedia/react-router-next-routes
 ```
 
 ## Usage

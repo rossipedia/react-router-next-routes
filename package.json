@@ -18,8 +18,9 @@
   ],
   "packageManager": "pnpm@12.3.4",
   "scripts": {
-    "build": "tsc -p tsconfig.json",
+    "build": "tsc -p tsconfig.build.json",
     "check": "pnpm typecheck && pnpm test",
+    "prepack": "pnpm build",
     "test": "node --import tsx --test test/*.test.ts",
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
