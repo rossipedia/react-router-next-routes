@@ -3,6 +3,8 @@
 
 # @rossipedia/react-router-next-routes
 
+[![NPM Version](https://img.shields.io/npm/v/%40rossipedia%2Freact-router-next-routes)](https://npmx.dev/package/@rossipedia/react-router-next-routes)
+
 Next.js-inspired file-system routing for React Router framework mode.
 
 ## Install
