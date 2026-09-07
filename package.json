@@ -1,22 +1,29 @@
 {
   "name": "@rossipedia/react-router-next-routes",
   "version": "0.2.0",
-  "description": "Next.js-inspired file-system routes for React Router framework mode",
-  "type": "module",
-  "license": "MIT",
   "private": false,
-  "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js"
-    }
+  "description": "Next.js-inspired file-system routes for React Router framework mode",
+  "license": "MIT",
+  "author": "Bryan Ross <git@rossipedia.com> (https://rossipedia.com)",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rossipedia/react-router-next-routes.git"
   },
   "files": [
     "dist",
     "README.md",
     "LICENSE"
   ],
-  "packageManager": "pnpm@12.3.4",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
     "check": "pnpm typecheck && pnpm test",
@@ -24,14 +31,15 @@
     "test": "node --import tsx --test test/*.test.ts",
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
-  "peerDependencies": {
-    "@react-router/dev": ">=7",
-    "react-router": ">=7"
-  },
   "devDependencies": {
     "@react-router/dev": "^8.3.1",
     "@types/node": "^26.4.1",
     "tsx": "^4.23.13",
     "typescript": "^7.0.2"
-  }
+  },
+  "peerDependencies": {
+    "@react-router/dev": ">=7",
+    "react-router": ">=7"
+  },
+  "packageManager": "pnpm@12.3.4"
 }
