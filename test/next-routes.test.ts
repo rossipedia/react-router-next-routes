@@ -51,6 +51,21 @@ test("allows a page and layout in the same directory", () => {
   assert.match(serialized, /"index":true/);
 });
 
+test("does not duplicate nested layout route ids", () => {
+  const dir = fixture([
+    "admin/layout.tsx",
+    "admin/page.tsx",
+    "admin/users/page.tsx",
+  ]);
+  const routes = nextRoutes(optionsFor(dir));
+  const serialized = JSON.stringify(routes);
+
+  assert.match(serialized, /admin\/layout\.tsx/);
+  assert.match(serialized, /admin\/page\.tsx/);
+  assert.match(serialized, /admin\/users\/page\.tsx/);
+  assert.equal(serialized.match(/admin\/layout\.tsx/g)?.length, 1);
+});
+
 test("maps dynamic, optional, and catch-all segments", () => {
   const dir = fixture([
     "users/[id]/page.tsx",

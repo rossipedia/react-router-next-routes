@@ -116,10 +116,6 @@ function build(directory: Directory, configDir: string): GeneratedRoute[] {
     const segment = toPathSegment(child.name);
     if (!segment) {
       children.push(...childRoutes);
-    } else if (child.layout) {
-      children.push(
-        ...prefix(segment, [layout(modulePath(child.layout, configDir), childRoutes)]),
-      );
     } else {
       children.push(...prefix(segment, childRoutes));
     }
