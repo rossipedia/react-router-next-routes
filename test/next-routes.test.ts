@@ -24,6 +24,31 @@ function optionsFor(dir: string) {
   return { rootDirectory: relative(resolve("app"), dir) };
 }
 
+test("uses app/routes by default", () => {
+  const appDirectory = mkdtempSync(join(tmpdir(), "next-routes-app-"));
+  const routesDirectory = join(appDirectory, "routes");
+  mkdirSync(routesDirectory, { recursive: true });
+  writeFileSync(
+    join(routesDirectory, "page.tsx"),
+    "export default function Route() { return null; }",
+  );
+
+  const previousAppDirectory = (globalThis as {
+    __reactRouterAppDirectory?: string;
+  }).__reactRouterAppDirectory;
+  (globalThis as { __reactRouterAppDirectory?: string }).__reactRouterAppDirectory =
+    appDirectory;
+
+  try {
+    assert.deepEqual(nextRoutes(), [
+      { file: "./routes/page.tsx", index: true },
+    ]);
+  } finally {
+    (globalThis as { __reactRouterAppDirectory?: string }).__reactRouterAppDirectory =
+      previousAppDirectory;
+  }
+});
+
 test("generates pages, route groups, and layouts", () => {
   const dir = fixture([
     "page.tsx",
@@ -71,12 +96,14 @@ test("maps dynamic, optional, and catch-all segments", () => {
     "users/[id]/page.tsx",
     "docs/[[lang]]/page.tsx",
     "files/[...path]/page.tsx",
+    "optional-files/[[...path]]/page.tsx",
   ]);
   const serialized = JSON.stringify(nextRoutes(optionsFor(dir)));
 
   assert.match(serialized, /"path":"users\/:id"/);
   assert.match(serialized, /"path":"docs\/:lang\?"/);
   assert.match(serialized, /"path":"files\/\*"/);
+  assert.match(serialized, /"path":"optional-files\/\*"/);
 });
 
 test("supports route.ts modules and ignores private or unsupported files", () => {
