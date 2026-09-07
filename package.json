@@ -1,6 +1,6 @@
 {
   "name": "@rossipedia/react-router-next-routes",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "private": false,
   "description": "Next.js-inspired file-system routes for React Router framework mode",
   "license": "MIT",
